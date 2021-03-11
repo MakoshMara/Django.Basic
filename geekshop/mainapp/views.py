@@ -1,25 +1,25 @@
 from django.shortcuts import render
 import json
 
+from mainapp.models import Product, ProductCategory
+
 
 def main(request):
+    products = Product.objects.all()[:4]
     content = {
-        'title': 'Главная'
+        'title': 'Главная',
+        'products': products
     }
     return render(request, 'mainapp/index.html', content)
 
 
-def products(request):
-    links_menu = [
-        {'href': 'prod_all', 'name': 'все'},
-        {'href': 'prod_home', 'name': 'дом'},
-        {'href': 'prod_office', 'name': 'офис'},
-        {'href': 'prod_modern', 'name': 'модерн'},
-        {'href': 'prod_classic', 'name': 'классика'},
-    ]
+def products(request, pk=None):
+    links_menu = ProductCategory.objects.all()
+    same_products = Product.objects.all()[:4]
     content = {
         'title': 'Товары',
-        'links_menu': links_menu
+        'links_menu': links_menu,
+        'same_products': same_products
     }
     return render(request, 'mainapp/products.html', content)
 
