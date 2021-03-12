@@ -1,0 +1,92 @@
+[
+  {
+    "category": "Классика",
+    "name": "Тоскана",
+    "image": "products_images/product-9.jpg",
+    "short": "Эргономичная спинка",
+    "description": "Почувствуйте комфорт и насладитесь цветовой гаммой",
+    "price": "98532.8",
+    "quantity": "15"
+  },
+  {
+    "category": "Классика",
+    "name": "Венеция",
+    "image": "products_images/product-8.jpg",
+    "short": "Классические формы",
+    "description": "Окунитесь в европейский комфорт",
+    "price": "42683.5",
+    "quantity": "28"
+  },
+  {
+    "category": "Классика",
+    "name": "Рим",
+    "image": "products_images/product-10.jpg",
+    "short": "Удачные пропорции",
+    "description": "Компактность и функциональность",
+    "price": "23547",
+    "quantity": "5"
+  },
+  {
+    "category": "Дом",
+    "name": "Комфорт 1",
+    "image": "products_images/product-1.jpg",
+    "short": "Комфортный стул",
+    "description": "Подойдет для просмотра фильмов",
+    "price": "2478.3",
+    "quantity": "28"
+  },
+  {
+    "category": "Дом",
+    "name": "Комфорт 2",
+    "image": "products_images/product-2.jpg",
+    "short": "Очень комфортный стул",
+    "description": "Подойдет для сна",
+    "price": "6872.2",
+    "quantity": "2"
+  },
+  {
+    "category": "Дом",
+    "name": "Люкс",
+    "image": "products_images/product-3.jpg",
+    "short": "Использованы премиальные материалы",
+    "description": "Для тех, кому некуда деньги девать",
+    "price": "87235.4",
+    "quantity": "28"
+  },
+  {
+    "category": "Офис",
+    "name": "Стандарт",
+    "image": "products_images/product-4.jpg",
+    "short": "Универсальное решение",
+    "description": "Тысячи их в каждом офисе",
+    "price": "900",
+    "quantity": "100"
+  },
+  {
+    "category": "Офис",
+    "name": "Премиум",
+    "image": "products_images/product-5.jpg",
+    "short": "Улучшенный дизайн",
+    "description": "Сотни их в каждом офисе",
+    "price": "9000",
+    "quantity": "50"
+  },
+  {
+    "category": "Модерн",
+    "name": "Новинка",
+    "image": "products_images/product-6.jpg",
+    "short": "Что-то новенькое",
+    "description": "Если ты стильный, модный, современный",
+    "price": "64875",
+    "quantity": "20"
+  },
+  {
+    "category": "Модерн",
+    "name": "Прогресс",
+    "image": "products_images/product-7.jpg",
+    "short": "Прогресс не остановить",
+    "description": "Функционал и комфорт не так уж и важны",
+    "price": "47853",
+    "quantity": "33"
+  }
+]
