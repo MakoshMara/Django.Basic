@@ -1,12 +1,21 @@
-<li><a href="{% url 'main' %}" {% if request.resolver_match.url_name == 'main' %}class="active"{% endif %}>домой</a>
-</li>
-<li><a href="{% url 'products:products' %}"
-       {% if 'products' in request.resolver_match.route %}class="active"{% endif %}>продукты</a></li>
-<li><a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>контакты</a>
-</li>
-{% if user.is_authenticated %}
-    <li><a href="{% url 'auth:edit' %}">{{ user.username }}</a></li>
-    <li><a href="{% url 'auth:logout' %}">Выход</a></li>
-{% else %}
-    <li><a href="{% url 'auth:login' %}">Вход</a></li>
-{% endif %}
+
+<ul class="menu">
+    <li><a href="{% url 'main' %}" {% if request.resolver_match.url_name == 'main' %}class="active"{% endif %}>домой</a>
+    </li>
+    <li><a href="{% url 'products:products' %}"
+           {% if 'products' in request.resolver_match.route %}class="active"{% endif %}>продукты</a></li>
+    <li><a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>контакты</a>
+    </li>
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'auth:edit' %}">{{ user.username }}</a></li>
+        <li><a href="{% url 'auth:logout' %}">Выход</a></li>
+    {% else %}
+        <li><a href="{% url 'auth:login' %}">Вход</a></li>
+    {% endif %}
+</ul>
+<a href="#" class="search"></a>
+<a href="{% url 'basket:basket' %}" class="basket">
+    <span> {{ basket}}</span>
+</a>
+
+
