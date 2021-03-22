@@ -8,8 +8,12 @@
     {% if user.is_authenticated %}
         <li><a href="{% url 'auth:edit' %}">{{ user.username }}</a></li>
         <li><a href="{% url 'auth:logout' %}">Выход</a></li>
+        {% if user.is_superuser %}
+            <li><a href="{% url 'adminapp:user_read' %}">Админка</a></li>
+        {% endif %}
     {% else %}
         <li><a href="{% url 'auth:login' %}">Вход</a></li>
+
     {% endif %}
 </ul>
 <a href="#" class="search"></a>

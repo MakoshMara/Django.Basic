@@ -1,0 +1,16 @@
+<ul class="menu">
+    <li>
+        <a href="{% url 'main' %}">На сайт</a>
+    </li>
+    <li>
+        <a href="{% url 'adminapp:user_read'%}" class="{% if 'user' in request.resolver_match.url_name%}active{% endif %}">Пользователи</a>
+    </li>
+    <li>
+        <a href="{% url 'adminapp:category_read' %}" class="{% if 'category' in request.resolver_match.url_name or 'product' in request.resolver_match.url_name%}active{% endif %}">
+        Категории
+        {% if category %}
+            :{{ category.name }}
+        {% endif %}
+        </a>
+    </li>
+</ul>
