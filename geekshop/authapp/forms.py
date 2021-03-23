@@ -22,7 +22,7 @@ class ShopUserRegisterForm(UserCreationForm):
         fields = ('username', 'email', 'first_name', 'age', 'avatar', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(ShopUserRegisterForm,self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 

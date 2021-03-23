@@ -7,31 +7,33 @@ from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditF
 
 
 def login(request):
-    login_form =ShopUserLoginForm(data=request.POST)
+    login_form = ShopUserLoginForm(data=request.POST)
 
-    next =request.GET.get('next','')
+    next = request.GET.get('next', '')
 
     if request.method == 'POST' and login_form.is_valid:
         username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate (username =username,password=password)
+        user = auth.authenticate(username=username, password=password)
         if user and user.is_active:
-            auth.login(request,user)
-            if 'next' in request.POST:
+            auth.login(request, user)
+            if 'next' in request.POST.keys():
                 return HttpResponseRedirect(request.POST['next'])
-            return HttpResponseRedirect(reverse('main'))
+            else:
+                return HttpResponseRedirect(reverse('main'))
 
     content = {
-        'title':'Вход',
+        'title': 'Вход',
         'login_form': login_form,
-        'next':next
+        'next': next
     }
-    return render(request,'authapp/login.html', content)
+    return render(request, 'authapp/login.html', content)
+
 
 def logout(request):
-
     auth.logout(request)
     return HttpResponseRedirect(reverse('main'))
+
 
 def register(request):
     if request.method == 'POST':
@@ -48,6 +50,7 @@ def register(request):
     }
     return render(request, 'authapp/register.html', content)
 
+
 def edit(request):
     if request.method == 'POST':
         edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
@@ -56,7 +59,6 @@ def edit(request):
             return HttpResponseRedirect(reverse('auth:edit'))
     else:
         edit_form = ShopUserEditForm(instance=request.user)
-
 
     content = {
         'title': 'Редактирование',
