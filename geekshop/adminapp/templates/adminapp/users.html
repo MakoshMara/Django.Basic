@@ -47,14 +47,21 @@
             </div>
 
         {% endfor%}
-{#    {% if paginator.num_pages > 1 %}#}
-{#        {% if page_obj.has_previous %}#}
-{#            <a href="{% url 'admin:user_read' page_obj.previous_page_number %}/">&larr;</a>#}
-{#        {% endif %}#}
-{#        <span class="current_page">{{ paginator.number }}</span>#}
-{#        {% if page_obj.has_next %}#}
-{#            <a href=" {% url 'admin:user_read' page_obj.next_page_number %}">&rarr;</a>#}
-{#        {% endif %}#}
-{#    {% endif %}#}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">&laquo; Перыдущая</a>
+                {% endif %}
+
+                <span class="current">
+                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Следующая &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
+
 {%  endblock %}

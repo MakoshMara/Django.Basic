@@ -35,6 +35,7 @@ class UserCreateView(CreateView):
     success_url = reverse_lazy('admin:user_read')
     form_class = ShopUserRegisterForm
 
+
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -51,6 +52,7 @@ class UserCreateView(CreateView):
 class UsersListView(ListView):
     model = ShopUser
     template_name = 'adminapp/users.html'
+    paginate_by = 2
 
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, request, *args, **kwargs):
