@@ -14,3 +14,11 @@
         </a>
     </li>
 </ul>
+<a href="{% url 'basket:basket' %}" class="basket">
+    <span>
+        {% if basket %}
+            {{ basket.0.total_cost|floatformat:0 }} руб
+            ({{ basket.0.total_quantity }} шт)
+        {% endif %}
+    </span>
+</a>
