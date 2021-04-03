@@ -4,11 +4,15 @@
 
 {% block content %}
   <div class="user_delete">
-    Уверены, что хотите удалить категорию "{{ category_to_delete.name }}"?
-    <form action="{% url 'admin:category_delete' category_to_delete.pk %}"
+    {% if object.is_active %}
+    Уверены, что хотите удалить категорию "{{ object.name }}"?
+    {% else %}
+    Уверены, что хотите востановить котегорию "{{ object.name }}"?
+    {% endif %}
+    <form action="{% url 'admin:category_delete' object.pk %}"
           method="post">
       {% csrf_token %}
-        {% if category_to_delete.is_active %}
+        {% if object.is_active %}
             <input class="btn btn-danger" type="submit" value="Удалить">
         {% else %}
             <input class="btn btn-primary" type="submit" value="Востановить">

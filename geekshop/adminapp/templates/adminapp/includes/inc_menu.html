@@ -8,8 +8,8 @@
     <li>
         <a href="{% url 'adminapp:category_read' %}" class="{% if 'category' in request.resolver_match.url_name or 'product' in request.resolver_match.url_name%}active{% endif %}">
         Категории
-        {% if category %}
-            :{{ category.name }}
+        {% if name_category %}
+            :{{ name_category }}
         {% endif %}
         </a>
     </li>
