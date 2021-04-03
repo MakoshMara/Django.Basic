@@ -4,15 +4,17 @@
 
 {% block content %}
   <div class="user_delete">
-    {% if object.is_active %}
-    Уверены, что хотите удалить пользователя "{{ object.username }}"?
-    {% else %}
-    Уверены, что хотите востановить пользователя "{{ object.username }}"?
+    Уверены, что хотите удалить {{ user_to_delete.username }}
+    {% if user_to_delete.first_name %}
+      {{ user_to_delete.first_name|title }}</br>
+      {% if user_to_delete.last_name %}
+        {{ user_to_delete.last_name|title }} ?
+      {% endif %}
     {% endif %}
-    <form action="{% url 'admin:user_delete' object.pk %}"
+    <form action="{% url 'admin:user_delete' user_to_delete.pk %}"
           method="post">
       {% csrf_token %}
-        {% if object.is_active %}
+        {% if user_to_delete.is_active %}
             <input class="btn btn-danger" type="submit" value="Удалить">
         {% else %}
             <input class="btn btn-primary" type="submit" value="Востановить">

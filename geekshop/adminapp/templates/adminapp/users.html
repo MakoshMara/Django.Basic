@@ -1,15 +1,14 @@
 {% extends 'adminapp/base.html' %}
 {% load static %}
-{% load my_tags %}
 
 {% block content %}
     <div class="users_list">
     <button class="new_user">
         <a href="{% url 'adminapp:user_create' %}">Новый пользователь</a>
     </button>
-        {% for obj in object_list %}
+        {% for obj in objects %}
             <div class="user_record {% if not obj.is_active %} not_active {% endif %}">
-                <img src="{{ obj.avatar|media_for_users}}" />
+                <img src="/media/{{ obj.avatar|default:'users_avatars/product-11.jpg'}}" />
                 <div class="user_role">
                     {% if obj.is_superuser%}
                         Администратор
@@ -47,21 +46,5 @@
             </div>
 
         {% endfor%}
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}">&laquo; Перыдущая</a>
-                {% endif %}
-
-                <span class="current">
-                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
-                </span>
-
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">Следующая &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
     </div>
-
 {%  endblock %}
