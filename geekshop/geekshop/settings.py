@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import json
 import os
 from pathlib import Path
 
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'social_django',
+
     'mainapp',
     'authapp',
     'basketapp',
@@ -146,3 +150,16 @@ EMAIL_USE_SSL = False
 # вариант логирования сообщений почты в виде файлов вместо отправки
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/email-messages/'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2'
+)
+SOCIAL_AUTH_VK_OAUTH_KEY = '7816135'
+SOCIAL_AUTH_VK_OAUTH_SECRET = '5a5cTOup48esfxCEmWhG'
+
+# with open('geekshop/vk.json') as f:
+#     vk = json.load(f)
+#
+# SOCIAL_AUTH_VK_OAUTH_KEY = vk['SOCIAL_AUTH_VK_OAUTH_KEY']
+# SOCIAL_AUTH_VK_OAUTH_SECRET = vk['SOCIAL_AUTH_VK_OAUTH_SECRET']
