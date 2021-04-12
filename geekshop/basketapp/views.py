@@ -2,22 +2,26 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView
 
 from basketapp.models import Basket
 from mainapp.models import Product
 
 
-@login_required
-def basket(request):
-    basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
-    content = {
-        'title': 'Корзина',
-        'basket_items': basket_items,
-    }
+# @login_required
+# def basket(request):
+#     basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+#     content = {
+#         'title': 'Корзина',
+#         'basket_items': basket_items,
+#     }
+#
+#     return render(request, 'basketapp/basket.html', content)
 
-    return render(request, 'basketapp/basket.html', content)
-
+class BasketView(ListView):
+    model = Basket
+    template_name = 'basketapp/basket.html'
 
 @login_required
 def basket_add(request, pk):
