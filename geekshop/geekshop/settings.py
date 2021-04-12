@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import json
 import os
 from pathlib import Path
 
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'social_django',
+
     'mainapp',
     'authapp',
     'basketapp',
@@ -52,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'geekshop.urls'
@@ -67,7 +72,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'mainapp.context_processors.basket'
+                'mainapp.context_processors.basket',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -146,3 +153,33 @@ EMAIL_USE_SSL = False
 # вариант логирования сообщений почты в виде файлов вместо отправки
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/email-messages/'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2'
+)
+# SOCIAL_AUTH_VK_OAUTH2_KEY = '7816135'
+# SOCIAL_AUTH_VK_OAUTH2_SECRET = '5a5cTOup48esfxCEmWhG'
+
+LOGIN_ERROR_URL = '/'
+
+with open('geekshop/vk.json') as f:
+    vk = json.load(f)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = vk['SOCIAL_AUTH_VK_OAUTH2_KEY']
+SOCIAL_AUTH_VK_OAUTH2_SECRET = vk['SOCIAL_AUTH_VK_OAUTH2_SECRET']
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.create_user',
+    'authapp.pipeline.save_user_profile',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+SOCIAL_AUTH_VK_OAUTH2_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
