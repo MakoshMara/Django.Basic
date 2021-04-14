@@ -6,11 +6,32 @@
     <li><a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>контакты</a>
     </li>
     {% if user.is_authenticated %}
-        <li><a href="{% url 'auth:edit' %}">{{ user.username }}</a></li>
-        <li><a href="{% url 'auth:logout' %}">Выход</a></li>
-        {% if user.is_superuser %}
-            <li><a href="{% url 'adminapp:user_read' %}">Админка</a></li>
+        <li>
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="" data-toggle="dropdown">
+                    {{ user.first_name|default:'Пользователь' }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'auth:edit' %}">
+                            профиль
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'orders:orders_list' %}">
+                            заказы
+                        </a>
+                    </li>
+                </ul>
+               </div>
+           </li>
         {% endif %}
+        {% if user.is_superuser %}
+           <li>
+               <a href="{% url 'admin:user_read' %}">админка</a>
+           </li>
+
     {% else %}
         <li><a href="{% url 'auth:login' %}">Вход</a></li>
 
