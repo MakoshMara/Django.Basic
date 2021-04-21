@@ -68,11 +68,13 @@ def edit(request):
     else:
         edit_form = ShopUserEditForm(instance=request.user)
         profile_form = ShopUserEditProfileForm(instance=request.user.shopuserprofile)
+        user = ShopUser.objects.get(pk = request.user.pk)
 
     content = {
         'title': 'Редактирование',
         'edit_form': edit_form,
-        'profile_form': profile_form
+        'profile_form': profile_form,
+        'user': user
 
     }
     return render(request, 'authapp/edit.html', content)
