@@ -123,7 +123,7 @@ def order_forming_complete(request, pk):
 def product_quantity_update_save(sender, update_fields, instance, **kwargs):
     if update_fields is 'quantity' or 'product' and sender == Basket:
         if instance.pk:
-            instance.product.quantity -= instance.quantity - sender.get_item(instance.pk)
+            instance.product.quantity -= instance.quantity - sender.get_item_quantity(instance.pk)
         else:
             instance.product.quantity -= instance.quantity
         instance.product.save()

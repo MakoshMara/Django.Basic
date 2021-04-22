@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView
 
+from authapp.models import ShopUser
 from basketapp.models import Basket
 from mainapp.models import Product
 
@@ -25,16 +26,28 @@ class BasketView(ListView):
 
 @login_required
 def basket_add(request, pk):
-    print(request.META.get('HTTP_REFERER'))
+    # if 'login' in request.META.get('HTTP_REFERER'):
+    #     return HttpResponseRedirect(reverse('products:product', args=[pk]))
+    # product_item = get_object_or_404(Product, pk=pk)
+    # basket_item = Basket.objects.filter(product=product_item, user=request.user).first()
+    #
+    # if not basket_item:
+    #     basket_item = Basket(user=request.user, product=product_item)
+    # basket_item.quantity += 1
+    # basket_item.save(update_fields=['quantity', 'product'])
+
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     if 'login' in request.META.get('HTTP_REFERER'):
         return HttpResponseRedirect(reverse('products:product', args=[pk]))
     product_item = get_object_or_404(Product, pk=pk)
-    basket_item = Basket.objects.filter(product=product_item, user=request.user).first()
+
+    basket_item = Basket.objects.filter(user=request.user, product=product_item).first()
 
     if not basket_item:
         basket_item = Basket(user=request.user, product=product_item)
+
     basket_item.quantity += 1
-    basket_item.save(update_fields=['quantity', 'product'])
+    basket_item.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -58,10 +71,11 @@ def basket_edit(request, pk, quantity):
             print(new_basket_item.product_cost)
         else:
             new_basket_item.delete()
-        basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+        object_list = Basket.objects.filter(user=request.user).order_by('product__category')
+        print(object_list)
 
         content = {
-            'basket_items': basket_items
+            'object_list': object_list
         }
         result = render_to_string('basketapp/includes/inc_basket_list.html', content)
 

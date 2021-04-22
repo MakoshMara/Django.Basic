@@ -39,6 +39,11 @@ class Basket(models.Model):
     def get_item(pk):
         return Basket.objects.get(pk=pk)
 
+    @staticmethod
+    def get_item_quantity(pk):
+        basket_quantity = Basket.objects.get(pk=pk).quantity
+        return basket_quantity
+
 
     # def delete(self):
     #     self.product.quantity += self.quantity

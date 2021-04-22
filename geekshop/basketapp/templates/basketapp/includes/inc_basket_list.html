@@ -11,8 +11,8 @@
                 </button>
             </div>
         {% endfor %}
-        {% if basket_items %}
+        {% if object_list  %}
             <div class="basket_summary">
-                В корзине {{ basket_items.0.total_quantity }} товаров на {{ basket_items.0.total_cost }} руб.
+                В корзине {{ object_list.0.total_quantity }} товаров на {{ object_list.0.total_cost }} руб.
             </div>
         {% endif %}
