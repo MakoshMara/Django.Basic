@@ -1,0 +1,126 @@
+    1  ssh-keygen
+    2  cat/root/.ssh/id_rsa.pub
+    3  cat /root/.ssh/id_rsa.pub
+    4  apt update
+    5  apt install nginx
+    6  apt install postgresql postgresql-contrib
+    7  apt install python3-venv
+    8  apt install git-core
+    9  nano /etc/postgresql/10/main/pg_hba.conf
+   10  nano /etc/postgresql
+   11  cd /etc/postgresql
+   12  ls
+   13  nano /etc/postgresql/12/main/pg_hba.conf
+   14  systemctl restart postgresql
+   15  useradd -g www-data -m django
+   16  cd /home/django/
+   17  git clone git@github.com:MakoshMara/Django.Basic.git
+   18  ls
+   19  cd geekshop/
+   20  cd Django.Basic
+   21  cd geekshop/
+   22  python3 -m venv env
+   23  ls
+   24  source env/bin/activate
+   25  pip3 install -r requirements.txt
+   26  pip3 install gunicorn
+   27  pip3 install wheel
+   28  pip3 install gunicorn
+   29  python3 manage.py migrate
+   30  pip3 install -r requirements.txt
+   31  python3 manage.py migrate
+   32  pip3 install social_auth_app_django
+   33  pip3 install psycopg2-binary
+   34  pip3 install requests
+   35  python3 manage.py migrate
+   36  python3 manage.py fill_db
+   37  python3 manage.py fill
+   38  python3 manage.py runserve
+   39  python3 manage.py runserver
+   40  ls
+   41  chown -R django /home/django/Django.Basic
+   42  sudo nano /etc/systemd/system/gunicorn.service
+   43  nn
+   44  sudo mcedit /etc/systemd/system/gunicorn.service
+   45  sudo nano /etc/systemd/system/gunicorn.service
+   46  sudo systemctl enable gunicorn
+   47  sudo systemctl start gunicorn
+   48  sudo systemctl status gunicorn
+   49  sudo nano /etc/nginx/sites-available/geekshop
+   50  sudo ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled
+   51  sudo nginx -t
+   52  sudo systemctl restart nginx
+   53  sudo nano /home/django/Django.Basic/geekshop/geekshop/settings.py
+   54  mc
+   55  sudo apt install mc
+   56  mc
+   57  cd /home/django/Django.Basic/geekshop
+   58  sourse env/bin/activate
+   59  source env/bin/activate
+   60  cd /home/django/Django.Basic
+   61  git pull
+   62  sudo nano /home/django/Django.Basic/geekshop/geekshop/settings.py
+   63  git pull
+   64  git status
+   65  git pull
+   66  git stash
+   67  git pull
+   68  sistemctl restart gunicorn
+   69  systemctl restart gunicorn
+   70  ьс
+   71  mc
+   72  sudo systemctl restart nginx
+   73  sudo nano /home/django/Django.Basic/geekshop/geekshop/settings.py
+   74  sudo nginx -t
+   75  mc
+   76  sudo systemctl status gunicorn
+   77  sistemctl restart gunicorn
+   78  systemctl restart gunicorn
+   79  sudo nano /home/django/Django.Basic/geekshop/geekshop/settings.py
+   80  tail -F /var/log/nginx/error.log
+   81  mc
+   82  sudo systemctl status gunicorn
+   83  sudo nano /etc/systemd/system/gunicorn.service
+   84  sudo ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled
+   85  sudo nginx -t
+   86  sudo systemctl restart nginx
+   87  sudo systemctl status nginx
+   88  sudo nano /home/django/Django.Basic/geekshop/geekshop/settings.py
+   89  systemctl restart postgresql
+   90  systemctl status postgresql
+   91  history > hist.txt
+   92  ls
+   93  cat hist.txt
+   94  geekshop  hist.txt  readme.md
+   95  (env) root@194-67-86-151:/home/django/Django.Basic# cat hist.txt
+   96  sudo nano /home/django/Django.Basic/geekshop/geekshop/settings.py
+   97  mc
+   98  cd geekshop
+   99  python3 manage.py migrate
+  100  psql -U postgres
+  101  sudo psql -U postgres
+  102  createdb geekshop
+  103  createdb -O postgres geekshop
+  104  sudo createdb -O postgres geekshop
+  105  sudo psql -U postgres
+  106  python3 manage.py migrate
+  107  cd
+  108  cd /home/django/Django.Basic/geekshop
+  109  python3 manage.py migrate
+  110  python3 -m venv env
+  111  source env/bin/activate
+  112  python3 manage.py migrate
+  113* sudo
+  114  systemctl restart postgresql
+  115  mc
+  116  python3 manage.py fill
+  117  sudo psql -U postgres
+  118  python3 manage.py migrate
+  119  python3 manage.py fill
+  120  python3 manage.py update_db
+  121  ь
+  122  mc
+  123  sudo systemctl restart ngnix
+  124  sudo systemctl restart nginx
+  125  history > hist.txt
+
