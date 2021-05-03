@@ -36,9 +36,15 @@ class ShopUserRegisterForm(UserCreationForm):
             raise forms.ValidationError('Вы плохой мальчик!')
         return data
 
+    def clean_age(self):
+        data = self.cleaned_data['age']
+        if data < 18:
+            raise forms.ValidationError('Вы слишком молоды!')
+        return data
+
     def save(self):
         user = super().save()
-        user.is_active = False
+        user.is_active = True
         salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
         user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
         user.save()
@@ -61,6 +67,12 @@ class ShopUserEditForm(UserChangeForm):
         dict_wrong = ['мудак', 'хрен', 'сексмашина']
         if dict_wrong.count(data) != 0:
             raise forms.ValidationError('Вы плохой мальчик!')
+        return data
+
+    def clean_age(self):
+        data = self.cleaned_data['age']
+        if data < 18:
+            raise forms.ValidationError('Вы слишком молоды!')
         return data
 
 class ShopUserEditProfileForm(forms.ModelForm):

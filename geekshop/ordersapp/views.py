@@ -81,20 +81,25 @@ class OrderUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=1)
+        orderobj = OrderItem.objects.filter(order=data['object'])
+        for obj in orderobj:
+            if obj.product.is_active == False:
+                obj.delete()
 
         if self.request.POST:
             formset = OrderFormSet(self.request.POST, instance=self.object)
+            print(self.object)
         else:
             formset = OrderFormSet(instance=self.object)
             for form in formset.forms:
                 if form.instance.pk:
                     form.initial['price'] = form.instance.product.price
+
         data['orderitems'] = formset
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
-        print(context)
         orderitems = context['orderitems']
 
         with transaction.atomic():
@@ -127,9 +132,9 @@ def order_forming_complete(request, pk):
 def product_quantity_update_save(sender, update_fields, instance, **kwargs):
     if update_fields is 'quantity' or 'product' and sender == Basket:
         if instance.pk:
-            instance.product.quantity -= instance.quantity - sender.get_item_quantity(instance.pk)
+            instance.product.quantity -= instance.product.quantity - sender.get_item_quantity(instance.pk)
         else:
-            instance.product.quantity -= instance.quantity
+            instance.product.quantity -= instance.product.quantity
         instance.product.save()
 
 

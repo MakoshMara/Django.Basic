@@ -107,7 +107,7 @@ def main(request):
     return render(request, 'mainapp/index.html', content)
 
 
-@cache_page(3600)
+# @cache_page(120)
 def products(request, pk=None):
     links_menu = get_links_menu()
     if pk is not None:
