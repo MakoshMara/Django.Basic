@@ -26,12 +26,14 @@
                 </ul>
                </div>
            </li>
-        {% endif %}
+           <li>
+               <a href="{% url 'auth:logout' %}">выйти</a>
+           </li>
         {% if user.is_superuser %}
            <li>
                <a href="{% url 'admin:user_read' %}">админка</a>
            </li>
-
+        {% endif %}
     {% else %}
         <li><a href="{% url 'auth:login' %}">Вход</a></li>
 
@@ -41,6 +43,7 @@
 <a href="{% url 'basket:basket' %}" class="basket">
     <span>
         {% if basket %}
+
             {{ basket.0.total_cost|floatformat:0 }} руб
             ({{ basket.0.total_quantity }} шт)
         {% endif %}

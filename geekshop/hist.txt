@@ -13,7 +13,7 @@
    13  nano /etc/postgresql/12/main/pg_hba.conf
    14  systemctl restart postgresql
    15  useradd -g www-data -m django
-   16  cd /home/django/
+   16  cd /home/django/Django.Basic/geekshop
    17  git clone git@github.com:MakoshMara/Django.Basic.git
    18  ls
    19  cd geekshop/
@@ -124,3 +124,5 @@
   124  sudo systemctl restart nginx
   125  history > hist.txt
 
+cd /home/django/
+#login-url = cd /home/django/http://194.67.86.151/auth/login/ POST username=django&password=geekbrains

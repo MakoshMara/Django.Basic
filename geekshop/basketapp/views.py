@@ -1,8 +1,10 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db.models import F
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 
 from authapp.models import ShopUser
@@ -24,19 +26,12 @@ class BasketView(ListView):
     model = Basket
     template_name = 'basketapp/basket.html'
 
+    @method_decorator(user_passes_test(lambda u: u.is_active))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 @login_required
 def basket_add(request, pk):
-    # if 'login' in request.META.get('HTTP_REFERER'):
-    #     return HttpResponseRedirect(reverse('products:product', args=[pk]))
-    # product_item = get_object_or_404(Product, pk=pk)
-    # basket_item = Basket.objects.filter(product=product_item, user=request.user).first()
-    #
-    # if not basket_item:
-    #     basket_item = Basket(user=request.user, product=product_item)
-    # basket_item.quantity += 1
-    # basket_item.save(update_fields=['quantity', 'product'])
-
-    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     if 'login' in request.META.get('HTTP_REFERER'):
         return HttpResponseRedirect(reverse('products:product', args=[pk]))
     product_item = get_object_or_404(Product, pk=pk)
@@ -46,8 +41,8 @@ def basket_add(request, pk):
     if not basket_item:
         basket_item = Basket(user=request.user, product=product_item)
         basket_item.save()
-    basket_item.quantity += 1
-    basket_item.save(update_fields=['quantity', 'product'])
+    basket_item.quantity = F('quantity') + 1
+    basket_item.save(update_fields=['quantity','product'])
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
